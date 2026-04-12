@@ -1,0 +1,322 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Architecture - Kimün (km)</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="Fast command-line tool for code analysis">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Commands</li><li class="chapter-item expanded "><a href="commands/loc.html"><strong aria-hidden="true">1.</strong> km loc</a></li><li class="chapter-item expanded "><a href="commands/dups.html"><strong aria-hidden="true">2.</strong> km dups</a></li><li class="chapter-item expanded "><a href="commands/indent.html"><strong aria-hidden="true">3.</strong> km indent</a></li><li class="chapter-item expanded "><a href="commands/hal.html"><strong aria-hidden="true">4.</strong> km hal</a></li><li class="chapter-item expanded "><a href="commands/cycom.html"><strong aria-hidden="true">5.</strong> km cycom</a></li><li class="chapter-item expanded "><a href="commands/cogcom.html"><strong aria-hidden="true">6.</strong> km cogcom</a></li><li class="chapter-item expanded "><a href="commands/mi.html"><strong aria-hidden="true">7.</strong> km mi</a></li><li class="chapter-item expanded "><a href="commands/miv.html"><strong aria-hidden="true">8.</strong> km miv</a></li><li class="chapter-item expanded "><a href="commands/smells.html"><strong aria-hidden="true">9.</strong> km smells</a></li><li class="chapter-item expanded "><a href="commands/deps.html"><strong aria-hidden="true">10.</strong> km deps</a></li><li class="chapter-item expanded "><a href="commands/report.html"><strong aria-hidden="true">11.</strong> km report</a></li><li class="chapter-item expanded "><a href="commands/score.html"><strong aria-hidden="true">12.</strong> km score</a></li><li class="chapter-item expanded "><a href="commands/hotspots.html"><strong aria-hidden="true">13.</strong> km hotspots</a></li><li class="chapter-item expanded "><a href="commands/churn.html"><strong aria-hidden="true">14.</strong> km churn</a></li><li class="chapter-item expanded "><a href="commands/knowledge.html"><strong aria-hidden="true">15.</strong> km knowledge</a></li><li class="chapter-item expanded "><a href="commands/tc.html"><strong aria-hidden="true">16.</strong> km tc</a></li><li class="chapter-item expanded "><a href="commands/authors.html"><strong aria-hidden="true">17.</strong> km authors</a></li><li class="chapter-item expanded "><a href="commands/age.html"><strong aria-hidden="true">18.</strong> km age</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Reference</li><li class="chapter-item expanded "><a href="languages.html"><strong aria-hidden="true">19.</strong> Supported Languages</a></li><li class="chapter-item expanded "><a href="architecture.html" class="active"><strong aria-hidden="true">20.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">21.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">22.</strong> References</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Kimün (km)</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/roramirez/kimun" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        <a href="https://github.com/roramirez/kimun/edit/main/docs/docs/architecture.md" title="Suggest an edit" aria-label="Suggest an edit">
+                            <i id="git-edit-button" class="fa fa-edit"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
+<p>Kimün is a CLI tool for code metrics built around a character-level finite state machine for line classification. All commands share a common file-walking layer (<code>src/walk.rs</code>, via the <code>ignore</code> crate) that respects <code>.gitignore</code> rules and deduplicates files by content hash.</p>
+<h2 id="module-map"><a class="header" href="#module-map">Module map</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Module</th><th>Command</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>src/loc/</code></td><td><code>km loc</code></td><td>Line counting FSM</td></tr>
+<tr><td><code>src/dups/</code></td><td><code>km dups</code></td><td>Duplicate detection</td></tr>
+<tr><td><code>src/indent/</code></td><td><code>km indent</code></td><td>Indentation complexity</td></tr>
+<tr><td><code>src/hal/</code></td><td><code>km hal</code></td><td>Halstead metrics</td></tr>
+<tr><td><code>src/cycom/</code></td><td><code>km cycom</code></td><td>Cyclomatic complexity</td></tr>
+<tr><td><code>src/cogcom/</code></td><td><code>km cogcom</code></td><td>Cognitive complexity</td></tr>
+<tr><td><code>src/mi/</code></td><td><code>km mi</code></td><td>Maintainability Index (VS)</td></tr>
+<tr><td><code>src/miv/</code></td><td><code>km miv</code></td><td>Maintainability Index (verifysoft)</td></tr>
+<tr><td><code>src/hotspots/</code></td><td><code>km hotspots</code></td><td>Change frequency × complexity</td></tr>
+<tr><td><code>src/knowledge/</code></td><td><code>km knowledge</code></td><td>Code ownership via git blame</td></tr>
+<tr><td><code>src/tc/</code></td><td><code>km tc</code></td><td>Temporal coupling</td></tr>
+<tr><td><code>src/churn/</code></td><td><code>km churn</code></td><td>Pure change frequency</td></tr>
+<tr><td><code>src/smells/</code></td><td><code>km smells</code></td><td>Code smell detection</td></tr>
+<tr><td><code>src/deps/</code></td><td><code>km deps</code></td><td>Dependency graph + cycle detection</td></tr>
+<tr><td><code>src/authors/</code></td><td><code>km authors</code></td><td>Per-author ownership summary</td></tr>
+<tr><td><code>src/age/</code></td><td><code>km age</code></td><td>File age classification</td></tr>
+<tr><td><code>src/score/</code></td><td><code>km score</code></td><td>Overall health grade</td></tr>
+<tr><td><code>src/report/</code></td><td><code>km report</code></td><td>Multi-metric unified report</td></tr>
+</tbody></table>
+</div>
+<h2 id="srcloc--line-counter-fsm"><a class="header" href="#srcloc--line-counter-fsm"><code>src/loc/</code> — Line counter FSM</a></h2>
+<ul>
+<li>
+<p><strong><code>language.rs</code></strong> — <code>LanguageSpec</code> struct + <code>lang!</code> macro defining 40+ languages. Detection by filename, extension, or shebang. Each spec declares: line comment markers, block comment delimiters, nesting support, string delimiter rules, pragma syntax, and exception characters for comment detection.</p>
+</li>
+<li>
+<p><strong><code>counter.rs</code></strong> — FSM with states <code>Normal</code>, <code>InString(StringKind)</code>, <code>InBlockComment(depth)</code>. Processes files line-by-line via <code>BufReader</code>, classifying each line as blank/comment/code. Mixed lines (code + comment) count as code. Key design decisions:</p>
+<ul>
+<li>Only <code>"</code> triggers string mode (not <code>'</code>) unless <code>single_quote_strings</code> is set — avoids Rust lifetime false positives</li>
+<li><code>InString</code> resets at line end for single/double quotes but persists for triple-quotes (Python)</li>
+<li>Block comments track nesting depth when <code>nested_block_comments</code> is true</li>
+<li>Pragmas (Haskell <code>{-# ... #-}</code>) are checked before block comments and counted as code</li>
+<li>Shebang lines (<code>#!</code>) are always counted as code</li>
+<li><code>line_comment_not_before</code> field prevents <code>--&gt;</code> from matching <code>--</code> in Haskell</li>
+</ul>
+</li>
+<li>
+<p><strong><code>report.rs</code></strong> — Formats results as a table sorted by code lines descending, with totals.</p>
+</li>
+<li>
+<p><strong><code>mod.rs</code></strong> — Orchestrates: walks directory tree, detects language, deduplicates files by content hash (streaming), counts lines, aggregates by language.</p>
+</li>
+</ul>
+<h3 id="adding-a-new-language"><a class="header" href="#adding-a-new-language">Adding a new language</a></h3>
+<p>Use the <code>lang!</code> macro in <code>language.rs</code>. For most languages:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>lang!("LangName", ext: ["ext1", "ext2"],
+      line: "//", block: "/*", "*/", sq: true,
+      shebangs: ["interpreter"]),
+<span class="boring">}</span></code></pre></pre>
+<p>Optional flags: <code>nested: true</code>, <code>sq: true</code> (single-quote strings), <code>tq: true</code> (triple-quote strings), <code>pragma: "{-#", "#-}"</code>. Use <code>lines: ["marker1", "marker2"]</code> for multiple line comment markers. For languages needing <code>line_comment_not_before</code>, write the <code>LanguageSpec</code> struct directly (see Haskell).</p>
+<h2 id="srcmi-and-srcmiv"><a class="header" href="#srcmi-and-srcmiv"><code>src/mi/</code> and <code>src/miv/</code></a></h2>
+<p>Both share the same orchestration pattern: walk files, call <code>hal::analyze_file</code> and <code>cycom::analyze_file</code> (<code>pub(crate)</code>) for Halstead volume and cyclomatic complexity, classify lines for LOC/comment counts, compute MI.</p>
+<p>Note: each file is read three times (once per analyzer) due to per-module architecture.</p>
+<ul>
+<li><strong><code>src/mi/analyzer.rs</code></strong> — <code>MILevel</code> enum (Green/Yellow/Red), VS formula: <code>MAX(0, raw * 100/171)</code>.</li>
+<li><strong><code>src/miv/analyzer.rs</code></strong> — <code>MILevel</code> enum (Good/Moderate/Difficult), verifysoft formula with radians conversion for comment percentage.</li>
+</ul>
+<h2 id="srccogcom--cognitive-complexity"><a class="header" href="#srccogcom--cognitive-complexity"><code>src/cogcom/</code> — Cognitive complexity</a></h2>
+<ul>
+<li><strong><code>analyzer.rs</code></strong> — Core computation: penalizes nesting increments and non-linear control structures. Resets <code>opens_flow</code> after consuming the first <code>{</code> on a control-flow line so closure/struct braces on the same line are not double-counted.</li>
+<li><strong><code>detection.rs</code></strong> — Language-aware function boundary detection.</li>
+<li><strong><code>markers.rs</code></strong> — Per-language complexity markers (keywords that trigger nesting increments).</li>
+</ul>
+<h2 id="srcscore--health-score"><a class="header" href="#srcscore--health-score"><code>src/score/</code> — Health score</a></h2>
+<ul>
+<li><strong><code>analyzer.rs</code></strong> — <code>Grade</code> enum (16 grades: A++ to F--), <code>DimensionScore</code>/<code>FileScore</code>/<code>ProjectScore</code> structs, <code>score_to_grade()</code>, <code>compute_project_score()</code>, <code>Grade::numeric_rank()</code> (used for gate comparisons), <code>Grade::parse()</code> (for <code>--fail-below</code> CLI arg), and 6 normalization functions. Halstead normalization uses effort-per-LOC.</li>
+<li><strong><code>diff.rs</code></strong> — <code>ScoreDiff</code>/<code>ScoreDelta</code> types and <code>compute_diff()</code>. Asserts dimension count and names match before zipping to prevent silent model mismatches.</li>
+<li><strong><code>mod.rs</code></strong> — <code>ScoreGate</code> struct (<code>fail_if_worse</code>, <code>fail_below</code>). <code>run_diff()</code> for <code>--trend</code>/<code>km score diff</code>: computes before/after snapshots, prints report, then evaluates quality gates (gates always evaluated after output so CI logs are complete).</li>
+<li><strong><code>scoring.rs</code></strong> / <strong><code>collector.rs</code></strong> / <strong><code>normalizer.rs</code></strong> — Dimension definitions, per-file metric extraction, and piecewise linear normalization curves.</li>
+</ul>
+<h2 id="git-based-modules"><a class="header" href="#git-based-modules">Git-based modules</a></h2>
+<p><code>hotspots</code>, <code>knowledge</code>, <code>tc</code>, <code>churn</code>, <code>authors</code>, <code>age</code> all open the git repo via <code>git2</code>, count commits or run blame, and use <code>util::parse_since</code> for the <code>--since DURATION</code> flag. <code>tc</code> works entirely from git data — no filesystem walk needed.</p>
+<h2 id="srcsmells"><a class="header" href="#srcsmells"><code>src/smells/</code></a></h2>
+<ul>
+<li><strong><code>rules.rs</code></strong> — Individual smell detectors: long functions, long parameter lists, TODO debt, magic numbers (note: <code>'_'</code> is a valid digit separator, included in <code>is_numeric_char</code>), and commented-out code.</li>
+<li><strong><code>mod.rs</code></strong> — Supports <code>--since-ref &lt;REF&gt;</code> to limit analysis to files changed since a git ref (ideal for CI/PR checks).</li>
+</ul>
+<h2 id="srcreport"><a class="header" href="#srcreport"><code>src/report/</code></a></h2>
+<ul>
+<li><strong><code>data.rs</code></strong> / <strong><code>builder.rs</code></strong> — Data types and per-file metric collection (LOC, dups, indent, Halstead, cyclomatic, MI).</li>
+<li><strong><code>markdown.rs</code></strong> / <strong><code>json.rs</code></strong> — Output formatters.</li>
+<li><strong><code>mod.rs</code></strong> — Walks files once, runs all analyzers, emits unified report.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="languages.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next prefetch" href="contributing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="languages.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next prefetch" href="contributing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

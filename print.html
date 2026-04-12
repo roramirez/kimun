@@ -1,0 +1,1060 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Kimün (km)</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="Fast command-line tool for code analysis">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body class="sidebar-visible no-js">
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('light')
+            html.classList.add(theme);
+            var body = document.querySelector('body');
+            body.classList.remove('no-js')
+            body.classList.add('js');
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var body = document.querySelector('body');
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            body.classList.remove('sidebar-visible');
+            body.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Introduction</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Commands</li><li class="chapter-item expanded "><a href="commands/loc.html"><strong aria-hidden="true">1.</strong> km loc</a></li><li class="chapter-item expanded "><a href="commands/dups.html"><strong aria-hidden="true">2.</strong> km dups</a></li><li class="chapter-item expanded "><a href="commands/indent.html"><strong aria-hidden="true">3.</strong> km indent</a></li><li class="chapter-item expanded "><a href="commands/hal.html"><strong aria-hidden="true">4.</strong> km hal</a></li><li class="chapter-item expanded "><a href="commands/cycom.html"><strong aria-hidden="true">5.</strong> km cycom</a></li><li class="chapter-item expanded "><a href="commands/cogcom.html"><strong aria-hidden="true">6.</strong> km cogcom</a></li><li class="chapter-item expanded "><a href="commands/mi.html"><strong aria-hidden="true">7.</strong> km mi</a></li><li class="chapter-item expanded "><a href="commands/miv.html"><strong aria-hidden="true">8.</strong> km miv</a></li><li class="chapter-item expanded "><a href="commands/smells.html"><strong aria-hidden="true">9.</strong> km smells</a></li><li class="chapter-item expanded "><a href="commands/deps.html"><strong aria-hidden="true">10.</strong> km deps</a></li><li class="chapter-item expanded "><a href="commands/report.html"><strong aria-hidden="true">11.</strong> km report</a></li><li class="chapter-item expanded "><a href="commands/score.html"><strong aria-hidden="true">12.</strong> km score</a></li><li class="chapter-item expanded "><a href="commands/hotspots.html"><strong aria-hidden="true">13.</strong> km hotspots</a></li><li class="chapter-item expanded "><a href="commands/churn.html"><strong aria-hidden="true">14.</strong> km churn</a></li><li class="chapter-item expanded "><a href="commands/knowledge.html"><strong aria-hidden="true">15.</strong> km knowledge</a></li><li class="chapter-item expanded "><a href="commands/tc.html"><strong aria-hidden="true">16.</strong> km tc</a></li><li class="chapter-item expanded "><a href="commands/authors.html"><strong aria-hidden="true">17.</strong> km authors</a></li><li class="chapter-item expanded "><a href="commands/age.html"><strong aria-hidden="true">18.</strong> km age</a></li><li class="chapter-item expanded affix "><li class="spacer"></li><li class="chapter-item expanded affix "><li class="part-title">Reference</li><li class="chapter-item expanded "><a href="languages.html"><strong aria-hidden="true">19.</strong> Supported Languages</a></li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">20.</strong> Architecture</a></li><li class="chapter-item expanded "><a href="contributing.html"><strong aria-hidden="true">21.</strong> Contributing</a></li><li class="chapter-item expanded "><a href="references.html"><strong aria-hidden="true">22.</strong> References</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Kimün (km)</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/roramirez/kimun" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="kimün-km"><a class="header" href="#kimün-km">Kimün (km)</a></h1>
+<blockquote>
+<p><em>Kimün</em> means "knowledge" or "wisdom" in Mapudungun, the language of the Mapuche people.</p>
+</blockquote>
+<p>A fast command-line tool for code analysis, written in Rust.</p>
+<p>Run <code>km score</code> on any project to get an overall health grade (A++ to F--) across five quality dimensions — cognitive complexity, duplication, indentation depth, Halstead effort, and file size.</p>
+<h2 id="installation"><a class="header" href="#installation">Installation</a></h2>
+<pre><code class="language-bash">cargo install --path .
+</code></pre>
+<h3 id="shell-completions"><a class="header" href="#shell-completions">Shell completions</a></h3>
+<pre><code class="language-bash"># zsh
+km completions zsh &gt; ~/.zfunc/_km
+
+# bash
+km completions bash &gt; /etc/bash_completion.d/km
+
+# fish
+km completions fish &gt; ~/.config/fish/completions/km.fish
+</code></pre>
+<h2 id="quick-start"><a class="header" href="#quick-start">Quick start</a></h2>
+<pre><code class="language-bash">km score          # overall health grade for the current directory
+km loc            # lines of code by language
+km hotspots       # files that are both complex and frequently changed
+km knowledge      # who owns what (bus factor)
+</code></pre>
+<p>Use the sidebar to browse all commands.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-loc--count-lines-of-code"><a class="header" href="#km-loc--count-lines-of-code"><code>km loc</code> — Count lines of code</a></h1>
+<pre><code class="language-bash">km loc [path]
+</code></pre>
+<p>Run on the current directory:</p>
+<pre><code class="language-bash">km loc
+</code></pre>
+<p>Run on a specific path:</p>
+<pre><code class="language-bash">km loc src/
+</code></pre>
+<h2 id="options"><a class="header" href="#options">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>-v</code>, <code>--verbose</code></td><td>Show summary stats (files read, unique, ignored, elapsed time)</td></tr>
+<tr><td><code>--by-author</code></td><td>Break down lines of code by git author (requires a git repository)</td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output"><a class="header" href="#example-output">Example output</a></h2>
+<pre><code>────────────────────────────────────────────────────────────────────
+ Language                Files        Blank      Comment         Code
+────────────────────────────────────────────────────────────────────
+ Rust                        5          120           45          850
+ TOML                        1            2            0           15
+────────────────────────────────────────────────────────────────────
+ SUM:                        6          122           45          865
+────────────────────────────────────────────────────────────────────
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-dups--detect-duplicate-code"><a class="header" href="#km-dups--detect-duplicate-code"><code>km dups</code> — Detect duplicate code</a></h1>
+<p>Finds duplicate code blocks across files using a sliding window approach. Applies the <strong>Rule of Three</strong>: duplicates appearing 3+ times are marked as <strong>CRITICAL</strong> (refactor recommended), while those appearing twice are <strong>TOLERABLE</strong>.</p>
+<p>Test files and directories are excluded by default, since tests often contain intentional repetition.</p>
+<pre><code class="language-bash">km dups [path]
+</code></pre>
+<h2 id="options-1"><a class="header" href="#options-1">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>-r</code>, <code>--report</code></td><td>Show detailed report with duplicate locations and code samples</td></tr>
+<tr><td><code>--show-all</code></td><td>Show all duplicate groups (default: top 20)</td></tr>
+<tr><td><code>--min-lines N</code></td><td>Minimum lines for a duplicate block (default: 6)</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--max-duplicates N</code></td><td>Exit with code 1 if duplicate groups exceed this limit (<code>--max-duplicates 0</code> fails on any duplicate)</td></tr>
+<tr><td><code>--max-dup-ratio PERCENT</code></td><td>Exit with code 1 if the duplicated-lines ratio exceeds this percentage (e.g. <code>--max-dup-ratio 5.0</code>)</td></tr>
+<tr><td><code>--fail-on-increase REF</code></td><td>Exit with code 1 if the current duplication ratio is higher than at the given git ref (e.g. <code>origin/main</code>). Prevents debt from growing silently in CI</td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-1"><a class="header" href="#example-output-1">Example output</a></h2>
+<p>Summary:</p>
+<pre><code>────────────────────────────────────────────────────────────────────
+ Duplication Analysis
+
+ Total code lines:                                             3247
+ Duplicated lines:                                              156
+ Duplication:                                                  4.8%
+
+ Duplicate groups:                                               12
+ Files with duplicates:                                           8
+ Largest duplicate:                                        18 lines
+
+ Rule of Three Analysis:
+   Critical duplicates (3+):     7 groups,    96 lines
+   Tolerable duplicates (2x):    5 groups,    60 lines
+
+ Assessment:                                                    Good
+────────────────────────────────────────────────────────────────────
+</code></pre>
+<p>Detailed (<code>--report</code>):</p>
+<pre><code>────────────────────────────────────────────────────────────────────
+ [1] CRITICAL: 18 lines, 3 occurrences (36 duplicated lines)
+
+   src/parser.rs:45-62
+   src/formatter.rs:120-137
+   src/validator.rs:89-106
+
+ Sample:
+   fn process_tokens(input: &amp;str) -&gt; Vec&lt;Token&gt; {
+       let mut tokens = Vec::new();
+       for line in input.lines() {
+       ...
+
+────────────────────────────────────────────────────────────────────
+ [2] TOLERABLE: 12 lines, 2 occurrences (12 duplicated lines)
+
+   src/main.rs:100-111
+   src/cli.rs:200-211
+
+ Sample:
+   match result {
+       Ok(value) =&gt; {
+       ...
+────────────────────────────────────────────────────────────────────
+</code></pre>
+<h2 id="excluded-test-patterns"><a class="header" href="#excluded-test-patterns">Excluded test patterns</a></h2>
+<p>By default, <code>km dups</code> skips files matching common test conventions:</p>
+<ul>
+<li><strong>Directories</strong>: <code>tests/</code>, <code>test/</code>, <code>__tests__/</code>, <code>spec/</code></li>
+<li><strong>By extension</strong>: <code>*_test.rs</code>, <code>*_test.go</code>, <code>test_*.py</code>, <code>*.test.js</code>, <code>*.spec.ts</code>, <code>*Test.java</code>, <code>*_test.cpp</code>, and more</li>
+</ul>
+<p>Use <code>--include-tests</code> to analyze test files as well.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-indent--indentation-complexity"><a class="header" href="#km-indent--indentation-complexity"><code>km indent</code> — Indentation complexity</a></h1>
+<p>Measures indentation-based complexity per file: standard deviation of indentation depths and maximum depth. Higher stddev suggests more complex control flow.</p>
+<pre><code class="language-bash">km indent [path]
+</code></pre>
+<h2 id="options-2"><a class="header" href="#options-2">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="km-hal--halstead-complexity-metrics"><a class="header" href="#km-hal--halstead-complexity-metrics"><code>km hal</code> — Halstead complexity metrics</a></h1>
+<p>Computes <a href="https://en.wikipedia.org/wiki/Halstead_complexity_measures">Halstead complexity metrics</a> per file by extracting operators and operands from source code.</p>
+<pre><code class="language-bash">km hal [path]
+</code></pre>
+<h2 id="metrics"><a class="header" href="#metrics">Metrics</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Symbol</th><th>Metric</th><th>Formula</th><th>Description</th></tr></thead><tbody>
+<tr><td>n1</td><td>Distinct operators</td><td>--</td><td>Unique operators in the code</td></tr>
+<tr><td>n2</td><td>Distinct operands</td><td>--</td><td>Unique operands in the code</td></tr>
+<tr><td>N1</td><td>Total operators</td><td>--</td><td>Total operator occurrences</td></tr>
+<tr><td>N2</td><td>Total operands</td><td>--</td><td>Total operand occurrences</td></tr>
+<tr><td>n</td><td>Vocabulary</td><td>n1 + n2</td><td>Size of the "alphabet" used</td></tr>
+<tr><td>N</td><td>Length</td><td>N1 + N2</td><td>Total number of tokens</td></tr>
+<tr><td>V</td><td>Volume</td><td>N * log2(n)</td><td>Size of the implementation</td></tr>
+<tr><td>D</td><td>Difficulty</td><td>(n1/2) * (N2/n2)</td><td>Error proneness</td></tr>
+<tr><td>E</td><td>Effort</td><td>D * V</td><td>Mental effort to develop</td></tr>
+<tr><td>B</td><td>Bugs</td><td>V / 3000</td><td>Estimated delivered bugs</td></tr>
+<tr><td>T</td><td>Time</td><td>E / 18 seconds</td><td>Estimated development time</td></tr>
+</tbody></table>
+</div>
+<p>Higher effort, volume, and bugs indicate more complex and error-prone code.</p>
+<h2 id="options-3"><a class="header" href="#options-3">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON (includes all metrics)</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--top N</code></td><td>Show only the top N files (default: 20)</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>effort</code>, <code>volume</code>, or <code>bugs</code> (default: <code>effort</code>)</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-2"><a class="header" href="#example-output-2">Example output</a></h2>
+<pre><code>Halstead Complexity Metrics
+──────────────────────────────────────────────────────────────────────────────
+ File                      n1   n2    N1    N2    Volume     Effort   Bugs
+──────────────────────────────────────────────────────────────────────────────
+ src/loc/counter.rs       139  116  3130  1169   34367.7   24070888  11.46
+ src/main.rs               37   43   520   185    4457.0     354743   1.49
+──────────────────────────────────────────────────────────────────────────────
+ Total (2 files)                     3650  1354   38824.7   24425631  12.95
+</code></pre>
+<h2 id="supported-languages"><a class="header" href="#supported-languages">Supported languages</a></h2>
+<p>Rust, Python, JavaScript, TypeScript, Go, C, C++, C#, Java, Objective-C, PHP, Dart, Ruby, Kotlin, Swift, Shell (Bash/Zsh).</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-cycom--cyclomatic-complexity"><a class="header" href="#km-cycom--cyclomatic-complexity"><code>km cycom</code> — Cyclomatic complexity</a></h1>
+<p>Computes cyclomatic complexity per file and per function by counting decision points (<code>if</code>, <code>for</code>, <code>while</code>, <code>match</code>, <code>&amp;&amp;</code>, <code>||</code>, etc.).</p>
+<pre><code class="language-bash">km cycom [path]
+</code></pre>
+<h2 id="options-4"><a class="header" href="#options-4">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--top N</code></td><td>Show only the top N files (default: 20)</td></tr>
+<tr><td><code>--min-complexity N</code></td><td>Minimum max-complexity to include a file (default: 1)</td></tr>
+<tr><td><code>--per-function</code></td><td>Show per-function breakdown</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="km-cogcom--cognitive-complexity"><a class="header" href="#km-cogcom--cognitive-complexity"><code>km cogcom</code> — Cognitive complexity</a></h1>
+<p>Computes cognitive complexity per file and per function using the <a href="https://www.sonarsource.com/docs/CognitiveComplexity.pdf">SonarSource method</a> (2017). Unlike cyclomatic complexity, cognitive complexity measures how difficult code is to <em>understand</em>, penalizing deeply nested structures and rewarding linear control flow.</p>
+<pre><code class="language-bash">km cogcom [path]
+</code></pre>
+<h2 id="options-5"><a class="header" href="#options-5">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--top N</code></td><td>Show only the top N files (default: 20)</td></tr>
+<tr><td><code>--min-complexity N</code></td><td>Minimum max-complexity to include a file (default: 1)</td></tr>
+<tr><td><code>--per-function</code></td><td>Show per-function breakdown</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>total</code>, <code>max</code>, or <code>avg</code> (default: <code>total</code>)</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="km-mi--maintainability-index-visual-studio-variant"><a class="header" href="#km-mi--maintainability-index-visual-studio-variant"><code>km mi</code> — Maintainability Index (Visual Studio variant)</a></h1>
+<p>Computes the <a href="https://learn.microsoft.com/en-us/visualstudio/code-quality/code-metrics-maintainability-index-range-and-meaning">Maintainability Index</a> per file using the Visual Studio formula. MI is normalized to a 0–100 scale with no comment-weight term.</p>
+<pre><code class="language-bash">km mi [path]
+</code></pre>
+<h2 id="formula"><a class="header" href="#formula">Formula</a></h2>
+<pre><code>MI = MAX(0, (171 - 5.2 * ln(V) - 0.23 * G - 16.2 * ln(LOC)) * 100 / 171)
+</code></pre>
+<p>Where V = Halstead Volume, G = cyclomatic complexity, LOC = code lines.</p>
+<h2 id="thresholds"><a class="header" href="#thresholds">Thresholds</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>MI Score</th><th>Level</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>20–100</td><td>green</td><td>Good maintainability</td></tr>
+<tr><td>10–19</td><td>yellow</td><td>Moderate maintainability</td></tr>
+<tr><td>0–9</td><td>red</td><td>Low maintainability</td></tr>
+</tbody></table>
+</div>
+<h2 id="options-6"><a class="header" href="#options-6">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--top N</code></td><td>Show only the top N files (default: 20)</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>mi</code> (ascending), <code>volume</code>, <code>complexity</code>, or <code>loc</code> (default: <code>mi</code>)</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-3"><a class="header" href="#example-output-3">Example output</a></h2>
+<pre><code>Maintainability Index (Visual Studio)
+──────────────────────────────────────────────────────────────────────
+ File                       Volume Cyclo   LOC     MI  Level
+──────────────────────────────────────────────────────────────────────
+ src/loc/counter.rs        32101.6   115   731    0.0  red
+ src/main.rs               11189.6    16   241   17.5  yellow
+ src/loc/report.rs          6257.0    13   185   22.2  green
+──────────────────────────────────────────────────────────────────────
+ Total (3 files)                         1157   13.2
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-miv--maintainability-index-verifysoft-variant"><a class="header" href="#km-miv--maintainability-index-verifysoft-variant"><code>km miv</code> — Maintainability Index (verifysoft variant)</a></h1>
+<p>Computes the <a href="https://www.verifysoft.com/en_maintainability.html">Maintainability Index</a> per file. MI combines Halstead Volume, Cyclomatic Complexity, lines of code, and comment ratio into a single maintainability score.</p>
+<p>This is the verifysoft.com variant, which includes a comment-weight term (MIcw) that rewards well-commented code.</p>
+<pre><code class="language-bash">km miv [path]
+</code></pre>
+<h2 id="formula-1"><a class="header" href="#formula-1">Formula</a></h2>
+<pre><code>MIwoc = 171 - 5.2 * ln(V) - 0.23 * G - 16.2 * ln(LOC)
+MIcw  = 50 * sin(sqrt(2.46 * radians(PerCM)))
+MI    = MIwoc + MIcw
+</code></pre>
+<p>Where V = Halstead Volume, G = cyclomatic complexity, LOC = code lines, PerCM = comment percentage (converted to radians).</p>
+<h2 id="thresholds-1"><a class="header" href="#thresholds-1">Thresholds</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>MI Score</th><th>Level</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>85+</td><td>good</td><td>Easy to maintain</td></tr>
+<tr><td>65–84</td><td>moderate</td><td>Reasonable maintainability</td></tr>
+<tr><td>&lt;65</td><td>difficult</td><td>Hard to maintain</td></tr>
+</tbody></table>
+</div>
+<h2 id="options-7"><a class="header" href="#options-7">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--top N</code></td><td>Show only the top N files (default: 20)</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>mi</code> (ascending), <code>volume</code>, <code>complexity</code>, or <code>loc</code> (default: <code>mi</code>)</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-4"><a class="header" href="#example-output-4">Example output</a></h2>
+<pre><code>Maintainability Index
+────────────────────────────────────────────────────────────────────────────────
+ File                       Volume Cyclo   LOC  Cmt%   MIwoc      MI  Level
+────────────────────────────────────────────────────────────────────────────────
+ src/loc/counter.rs        32101.6   115   731   3.6   -16.2     2.8  difficult
+ src/main.rs                8686.7    14   204  14.6    34.5    68.2  moderate
+ src/util.rs                2816.9    18    76   9.5    55.4    84.7  moderate
+────────────────────────────────────────────────────────────────────────────────
+ Total (3 files)                         1011                  51.9
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-smells--code-smell-detection"><a class="header" href="#km-smells--code-smell-detection"><code>km smells</code> — Code smell detection</a></h1>
+<p>Detects common code quality issues per file using text-based heuristics (no AST required). Only languages with complexity marker support are analyzed (same set as <code>km cycom</code>: Rust, Python, JS/TS, C/C++, Go, etc.).</p>
+<pre><code class="language-bash">km smells [path]
+</code></pre>
+<h2 id="smell-types"><a class="header" href="#smell-types">Smell types</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Smell</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>long_function</code></td><td>Function body exceeds <code>--max-lines</code> (default: 50)</td></tr>
+<tr><td><code>long_params</code></td><td>Function has more than <code>--max-params</code> parameters (default: 4)</td></tr>
+<tr><td><code>todo_debt</code></td><td>TODO, FIXME, HACK, XXX, or BUG in comment lines</td></tr>
+<tr><td><code>magic_number</code></td><td>Bare numeric literals in code (excluding 0, 1, 2, -1 and <code>const</code>/<code>let</code> declarations)</td></tr>
+<tr><td><code>commented_code</code></td><td>Two or more consecutive comment lines containing code-like patterns</td></tr>
+</tbody></table>
+</div>
+<h2 id="options-8"><a class="header" href="#options-8">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--top N</code></td><td>Show only the top N files by smell count (default: 20)</td></tr>
+<tr><td><code>--max-lines N</code></td><td>Maximum function body lines before flagging (default: 50)</td></tr>
+<tr><td><code>--max-params N</code></td><td>Maximum parameter count before flagging (default: 4)</td></tr>
+<tr><td><code>--files FILE</code></td><td>Analyze only these specific files (repeatable). Useful for scripting</td></tr>
+<tr><td><code>--since-ref REF</code></td><td>Analyze only files changed since this git ref (e.g. <code>origin/main</code>, <code>HEAD~1</code>). Ideal for CI</td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-5"><a class="header" href="#example-output-5">Example output</a></h2>
+<pre><code>Code Smells
+──────────────────────────────────────────────────────────────────────────────
+ File                            Smells  Top Smell
+──────────────────────────────────────────────────────────────────────────────
+ src/loc/counter.rs                  12  magic_number (7)
+ src/main.rs                          6  todo_debt (4)
+ src/dups/detector.rs                 3  long_function (2)
+──────────────────────────────────────────────────────────────────────────────
+ Total (3 files)                     21
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-deps--dependency-graph-analysis"><a class="header" href="#km-deps--dependency-graph-analysis"><code>km deps</code> — Dependency graph analysis</a></h1>
+<p>Analyzes internal module dependencies by parsing import/use/require statements. Builds a directed graph of file-level coupling and detects cycles using Tarjan's SCC algorithm.</p>
+<pre><code class="language-bash">km deps [path]
+</code></pre>
+<p>Supports Rust (<code>mod X;</code>), Python (relative <code>from .X import</code>), JavaScript/TypeScript (relative <code>import</code>/<code>require</code>), and Go (imports matching the module path from <code>go.mod</code>). External dependencies (crates, npm packages) are ignored.</p>
+<h2 id="options-9"><a class="header" href="#options-9">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--cycles-only</code></td><td>Show only files that participate in a dependency cycle</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>fan-out</code> (default) or <code>fan-in</code></td></tr>
+<tr><td><code>--top N</code></td><td>Show only top N files (default: 20)</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-6"><a class="header" href="#example-output-6">Example output</a></h2>
+<pre><code>Dependency Graph
+────────────────────────────────────────────────────────────────────────
+ File                    Language Fan-In Fan-Out Cycle
+────────────────────────────────────────────────────────────────────────
+ main.rs                     Rust      0      26    no
+ score/mod.rs                Rust      1       7    no
+ report/mod.rs               Rust      1       5    no
+────────────────────────────────────────────────────────────────────────
+No dependency cycles detected.
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-report--comprehensive-metrics-report"><a class="header" href="#km-report--comprehensive-metrics-report"><code>km report</code> — Comprehensive metrics report</a></h1>
+<p>Generates a multi-section report combining all static code metrics in a single pass: lines of code, duplicates, indentation, Halstead, cyclomatic complexity, cognitive complexity, and maintainability index.</p>
+<pre><code class="language-bash">km report [path]
+</code></pre>
+<h2 id="options-10"><a class="header" href="#options-10">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--top N</code></td><td>Show only the top N files per section (default: 20)</td></tr>
+<tr><td><code>--min-lines N</code></td><td>Minimum lines for a duplicate block (default: 6)</td></tr>
+<tr><td><code>--full</code></td><td>Show all files instead of truncating to top N</td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="km-score--code-health-score"><a class="header" href="#km-score--code-health-score"><code>km score</code> — Code health score</a></h1>
+<p>Computes an overall code health score for the project, grading it from A++ (exceptional) to F-- (severe issues). Uses only static metrics (no git required).</p>
+<blockquote>
+<p><strong>Breaking change in v0.14:</strong> The default scoring model changed from MI + Cyclomatic Complexity (6 dimensions) to Cognitive Complexity (5 dimensions). Use <code>--model legacy</code> to restore v0.13 behavior.</p>
+</blockquote>
+<p>Non-code files (Markdown, TOML, JSON, etc.) are automatically excluded. Inline test blocks (<code>#[cfg(test)]</code>) are excluded from duplication analysis.</p>
+<pre><code class="language-bash">km score [path]
+km score --model legacy [path]    # v0.13 scoring model
+</code></pre>
+<h2 id="dimensions-and-weights-default-cogcom"><a class="header" href="#dimensions-and-weights-default-cogcom">Dimensions and weights (default: cogcom)</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Dimension</th><th>Weight</th><th>What it measures</th></tr></thead><tbody>
+<tr><td>Cognitive Complexity</td><td>30%</td><td>SonarSource method, penalizes nesting</td></tr>
+<tr><td>Duplication</td><td>20%</td><td>Project-wide duplicate code %</td></tr>
+<tr><td>Indentation Complexity</td><td>15%</td><td>Stddev of indentation depth</td></tr>
+<tr><td>Halstead Effort</td><td>20%</td><td>Mental effort per LOC</td></tr>
+<tr><td>File Size</td><td>15%</td><td>Optimal range 50-300 LOC</td></tr>
+</tbody></table>
+</div>
+<h2 id="dimensions-and-weights---model-legacy"><a class="header" href="#dimensions-and-weights---model-legacy">Dimensions and weights (--model legacy)</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Dimension</th><th>Weight</th><th>What it measures</th></tr></thead><tbody>
+<tr><td>Maintainability Index</td><td>30%</td><td>Verifysoft MI, normalized to 0-100</td></tr>
+<tr><td>Cyclomatic Complexity</td><td>20%</td><td>Max complexity per file</td></tr>
+<tr><td>Duplication</td><td>15%</td><td>Project-wide duplicate code %</td></tr>
+<tr><td>Indentation Complexity</td><td>15%</td><td>Stddev of indentation depth</td></tr>
+<tr><td>Halstead Effort</td><td>15%</td><td>Mental effort per LOC</td></tr>
+<tr><td>File Size</td><td>5%</td><td>Optimal range 50-300 LOC</td></tr>
+</tbody></table>
+</div>
+<p>Each dimension is aggregated as a LOC-weighted mean across all files (except Duplication which is a single project-level value). The project score is the weighted sum of all dimension scores.</p>
+<h2 id="grade-scale"><a class="header" href="#grade-scale">Grade scale</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Grade</th><th>Score range</th><th>Grade</th><th>Score range</th></tr></thead><tbody>
+<tr><td>A++</td><td>97-100</td><td>C+</td><td>73-76</td></tr>
+<tr><td>A+</td><td>93-96</td><td>C</td><td>70-72</td></tr>
+<tr><td>A</td><td>90-92</td><td>C-</td><td>67-69</td></tr>
+<tr><td>A-</td><td>87-89</td><td>D+</td><td>63-66</td></tr>
+<tr><td>B+</td><td>83-86</td><td>D</td><td>60-62</td></tr>
+<tr><td>B</td><td>80-82</td><td>D-</td><td>57-59</td></tr>
+<tr><td>B-</td><td>77-79</td><td>F</td><td>50-56</td></tr>
+<tr><td></td><td></td><td>F-</td><td>40-49</td></tr>
+<tr><td></td><td></td><td>F--</td><td>0-39</td></tr>
+</tbody></table>
+</div>
+<h2 id="options-11"><a class="header" href="#options-11">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--model MODEL</code></td><td>Scoring model: <code>cogcom</code> (default, v0.14+) or <code>legacy</code> (MI + cyclomatic, v0.13)</td></tr>
+<tr><td><code>--trend [REF]</code></td><td>Compare current score against a git ref (default: <code>HEAD</code>). Shows change: <code>B- → B (+2.3)</code>. Useful for PR review: <code>--trend origin/main</code></td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--bottom N</code></td><td>Number of worst files to show in "needs attention" (default: 10)</td></tr>
+<tr><td><code>--min-lines N</code></td><td>Minimum lines for a duplicate block (default: 6)</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-7"><a class="header" href="#example-output-7">Example output</a></h2>
+<pre><code>Code Health Score
+──────────────────────────────────────────────────────────────────
+ Project Score:  B+ (84.3)
+ Files Analyzed: 42
+ Total LOC:      8,432
+──────────────────────────────────────────────────────────────────
+ Dimension                 Weight   Score   Grade
+──────────────────────────────────────────────────────────────────
+ Cognitive Complexity         30%    85.6   B+
+ Duplication                  20%    91.3   A
+ Indentation Complexity       15%    79.8   B-
+ Halstead Effort              20%    85.1   B+
+ File Size                    15%    89.2   A-
+──────────────────────────────────────────────────────────────────
+
+ Files Needing Attention (worst scores)
+──────────────────────────────────────────────────────────────────
+ Score  Grade  File                       Issues
+──────────────────────────────────────────────────────────────────
+  54.2  F      src/legacy/parser.rs       Cognitive: 42, Indent: 3.2
+  63.7  D+     src/utils/helpers.rs       Effort: 15200, Indent: 2.4
+  68.9  C-     src/core/engine.rs         Size: 1243 LOC
+──────────────────────────────────────────────────────────────────
+</code></pre>
+<h2 id="km-score-diff--compare-score-against-a-git-ref"><a class="header" href="#km-score-diff--compare-score-against-a-git-ref"><code>km score diff</code> — Compare score against a git ref</a></h2>
+<p>Extracts the file tree at the given ref, computes the score for both snapshots, and shows a delta table per dimension. Useful for reviewing how commits impact code quality.</p>
+<pre><code class="language-bash">km score diff                          # compare vs HEAD (uncommitted changes)
+km score diff --git-ref HEAD~1         # compare vs previous commit
+km score diff --git-ref main           # compare vs main branch
+km score diff --json                   # machine-readable output
+</code></pre>
+<h3 id="options-12"><a class="header" href="#options-12">Options</a></h3>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--git-ref REF</code></td><td>Git ref to compare against (default: <code>HEAD</code>)</td></tr>
+<tr><td><code>--model MODEL</code></td><td>Scoring model: <code>cogcom</code> (default) or <code>legacy</code></td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--bottom N</code></td><td>Number of worst files to show (default: 10)</td></tr>
+<tr><td><code>--min-lines N</code></td><td>Minimum lines for a duplicate block (default: 6)</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="km-hotspots--hotspot-analysis"><a class="header" href="#km-hotspots--hotspot-analysis"><code>km hotspots</code> — Hotspot analysis</a></h1>
+<p>Finds hotspots: files that change frequently AND have high complexity. Based on Adam Thornhill's method ("Your Code as a Crime Scene").</p>
+<pre><code class="language-bash">km hotspots [path]
+</code></pre>
+<h2 id="formula-2"><a class="header" href="#formula-2">Formula</a></h2>
+<pre><code>Score = Commits × Complexity
+</code></pre>
+<p>Files with high scores concentrate risk — they are both change-prone and complex, making them the highest-value refactoring targets.</p>
+<p>By default, complexity is measured by <strong>total indentation</strong> (sum of logical indentation levels across all code lines), following Thornhill's original method from "Your Code as a Crime Scene". Use <code>--complexity cycom</code> for cyclomatic complexity instead.</p>
+<p>Requires a git repository. Merge commits are excluded from the count.</p>
+<h2 id="options-13"><a class="header" href="#options-13">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--top N</code></td><td>Show only the top N files (default: 20)</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>score</code>, <code>commits</code>, or <code>complexity</code> (default: <code>score</code>)</td></tr>
+<tr><td><code>--since DURATION</code></td><td>Only consider commits since this time (e.g. <code>30d</code>, <code>6m</code>, <code>1y</code>)</td></tr>
+<tr><td><code>--complexity METRIC</code></td><td><code>indent</code> (default, Thornhill) or <code>cycom</code> (cyclomatic)</td></tr>
+</tbody></table>
+</div>
+<p>Duration units: <code>d</code> (days), <code>m</code> (months, approx. 30 days), <code>y</code> (years, approx. 365 days).</p>
+<h2 id="example-output-8"><a class="header" href="#example-output-8">Example output</a></h2>
+<p>Default — indentation complexity:</p>
+<pre><code>Hotspots (Commits × Total Indent Complexity)
+──────────────────────────────────────────────────────────────────────────────
+ File                    Language Commits Total Indent      Score
+──────────────────────────────────────────────────────────────────────────────
+ src/main.rs                 Rust      18        613      11034
+ src/loc/counter.rs          Rust       7       1490      10430
+ src/dups/detector.rs        Rust       7       1288       9016
+ src/dups/mod.rs             Rust       9        603       5427
+ src/report/mod.rs           Rust       4        998       3992
+──────────────────────────────────────────────────────────────────────────────
+
+Score = Commits × Total Indentation (Thornhill method).
+High-score files are change-prone and complex — prime refactoring targets.
+</code></pre>
+<p>With <code>--complexity cycom</code>:</p>
+<pre><code>Hotspots (Commits × Cyclomatic Complexity)
+──────────────────────────────────────────────────────────────────────────────
+ File                     Language Commits Cyclomatic      Score
+──────────────────────────────────────────────────────────────────────────────
+ src/loc/counter.rs           Rust       7        115        805
+ src/dups/mod.rs              Rust       9         44        396
+ src/main.rs                  Rust      18         21        378
+ src/cycom/analyzer.rs        Rust       4         92        368
+ src/dups/detector.rs         Rust       7         46        322
+──────────────────────────────────────────────────────────────────────────────
+
+Score = Commits × Cyclomatic Complexity.
+High-score files are change-prone and complex — prime refactoring targets.
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-churn--code-churn-analysis"><a class="header" href="#km-churn--code-churn-analysis"><code>km churn</code> — Code churn analysis</a></h1>
+<p>Measures pure change frequency per file from git history (commit count only, no complexity weight). Identifies the most frequently modified files — high churn without a corresponding quality improvement is a maintenance signal.</p>
+<pre><code class="language-bash">km churn [path]
+</code></pre>
+<h2 id="options-14"><a class="header" href="#options-14">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--top N</code></td><td>Show only the top N files (default: 20)</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>commits</code> (default), <code>rate</code> (commits/month), or <code>file</code></td></tr>
+<tr><td><code>--since DURATION</code></td><td>Only consider commits since this time (e.g. <code>6m</code>, <code>1y</code>, <code>30d</code>)</td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-9"><a class="header" href="#example-output-9">Example output</a></h2>
+<pre><code>Code Churn — Change Frequency
+──────────────────────────────────────────────────────────────────────────────
+ File                     Language  Commits   Rate/mo   First Seen   Last Seen
+──────────────────────────────────────────────────────────────────────────────
+ src/main.rs                  Rust       18      3.2    2025-01-10  2026-03-28
+ src/loc/counter.rs           Rust        7      1.3    2025-01-10  2026-02-14
+ src/dups/detector.rs         Rust        7      1.2    2025-02-01  2026-02-20
+──────────────────────────────────────────────────────────────────────────────
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-knowledge--code-ownership-analysis"><a class="header" href="#km-knowledge--code-ownership-analysis"><code>km knowledge</code> — Code ownership analysis</a></h1>
+<p>Analyzes code ownership patterns via git blame (knowledge maps). Based on Adam Thornhill's method ("Your Code as a Crime Scene" chapters 8-9).</p>
+<pre><code class="language-bash">km knowledge [path]
+</code></pre>
+<p>Identifies bus factor risk and knowledge concentration per file. Generated files (lock files, minified JS, etc.) are automatically excluded.</p>
+<h2 id="risk-levels"><a class="header" href="#risk-levels">Risk levels</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Risk</th><th>Condition</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>CRITICAL</td><td>1 person owns &gt;80%</td><td>High bus factor risk</td></tr>
+<tr><td>HIGH</td><td>1 person owns 60-80%</td><td>Significant concentration</td></tr>
+<tr><td>MEDIUM</td><td>2-3 people own &gt;80% combined</td><td>Moderate concentration</td></tr>
+<tr><td>LOW</td><td>Well-distributed</td><td>Healthy ownership</td></tr>
+</tbody></table>
+</div>
+<h2 id="knowledge-loss-detection"><a class="header" href="#knowledge-loss-detection">Knowledge loss detection</a></h2>
+<p>Use <code>--since</code> to define "recent activity". If the primary owner of a file has no commits in that period, the file is flagged with <strong>knowledge loss</strong> risk. Use <code>--risk-only</code> to show only those files.</p>
+<h2 id="options-15"><a class="header" href="#options-15">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--include-tests</code></td><td>Include test files in analysis (excluded by default)</td></tr>
+<tr><td><code>--top N</code></td><td>Show only the top N files (default: 20)</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>concentration</code>, <code>diffusion</code>, or <code>risk</code> (default: <code>concentration</code>)</td></tr>
+<tr><td><code>--since DURATION</code></td><td>Define recent activity window for knowledge loss (e.g. <code>6m</code>, <code>1y</code>, <code>30d</code>)</td></tr>
+<tr><td><code>--risk-only</code></td><td>Show only files with knowledge loss risk</td></tr>
+<tr><td><code>--summary</code></td><td>Aggregate by author: files owned, lines, languages, worst risk</td></tr>
+<tr><td><code>--bus-factor</code></td><td>Show project bus factor (minimum contributors covering 80% of code)</td></tr>
+<tr><td><code>--author NAME</code></td><td>Show only files owned by this author (case-insensitive substring match)</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-10"><a class="header" href="#example-output-10">Example output</a></h2>
+<pre><code>Knowledge Map — Code Ownership
+──────────────────────────────────────────────────────────────────────────────
+ File                       Language  Lines  Owner         Own%  Contrib  Risk
+──────────────────────────────────────────────────────────────────────────────
+ src/loc/counter.rs             Rust    731  E. Diaz        94%        2  CRITICAL
+ src/main.rs                    Rust    241  E. Diaz        78%        3  HIGH
+ src/walk.rs                    Rust    145  E. Diaz        55%        5  MEDIUM
+──────────────────────────────────────────────────────────────────────────────
+
+Files with knowledge loss risk (primary owner inactive): 1
+  src/legacy.rs (Former Dev)
+</code></pre>
+<p>Use <code>--bus-factor</code> to compute how many contributors you can afford to lose:</p>
+<pre><code>$ km knowledge --bus-factor
+Project Bus Factor: 2
+
+ Losing 2 key contributors would put 80% of the project's knowledge at risk.
+ Risk: HIGH — two people hold critical knowledge
+
+──────────────────────────────────────────────
+ Rank  Author        Lines    Share  Cumulative
+──────────────────────────────────────────────
+    1  E. Diaz        8420   68.12%     68.12%
+    2  A. Torres      1490   12.06%     80.18%  ← 80% threshold
+    3  R. Soto         940    7.61%     87.79%
+──────────────────────────────────────────────
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-tc--temporal-coupling-analysis"><a class="header" href="#km-tc--temporal-coupling-analysis"><code>km tc</code> — Temporal coupling analysis</a></h1>
+<p>Analyzes temporal coupling between files via git history. Based on Adam Thornhill's method ("Your Code as a Crime Scene" ch. 7): files that frequently change together in the same commits have implicit coupling, even without direct imports.</p>
+<pre><code class="language-bash">km tc [path]
+</code></pre>
+<h2 id="formula-3"><a class="header" href="#formula-3">Formula</a></h2>
+<pre><code>Coupling strength = shared_commits / min(commits_a, commits_b)
+</code></pre>
+<h2 id="coupling-levels"><a class="header" href="#coupling-levels">Coupling levels</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Strength</th><th>Level</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>&gt;= 0.5</td><td>STRONG</td><td>Files change together most of the time</td></tr>
+<tr><td>0.3-0.5</td><td>MODERATE</td><td>Noticeable co-change pattern</td></tr>
+<tr><td>&lt; 0.3</td><td>WEAK</td><td>Occasional co-changes</td></tr>
+</tbody></table>
+</div>
+<p>High coupling between unrelated modules suggests hidden dependencies or architectural issues — consider extracting shared abstractions.</p>
+<h2 id="options-16"><a class="header" href="#options-16">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+<tr><td><code>--top N</code></td><td>Show only the top N file pairs (default: 20)</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>strength</code> or <code>shared</code> (default: <code>strength</code>)</td></tr>
+<tr><td><code>--since DURATION</code></td><td>Only consider commits since this time (e.g. <code>6m</code>, <code>1y</code>, <code>30d</code>)</td></tr>
+<tr><td><code>--min-degree N</code></td><td>Minimum commits per file to be included (default: 3)</td></tr>
+<tr><td><code>--min-strength F</code></td><td>Minimum coupling strength to show (e.g. <code>0.5</code> for strong only)</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-11"><a class="header" href="#example-output-11">Example output</a></h2>
+<pre><code>Temporal Coupling — Files That Change Together
+──────────────────────────────────────────────────────────────────────────────────
+ File A                     File B                     Shared  Strength  Level
+──────────────────────────────────────────────────────────────────────────────────
+ src/auth/jwt.rs            src/auth/middleware.rs          12      0.86  STRONG
+ lib/parser.rs              lib/validator.rs                 8      0.53  STRONG
+ config/db.yaml             config/cache.yaml                6      0.35  MODERATE
+──────────────────────────────────────────────────────────────────────────────────
+
+12 coupled pairs found (3 shown). Showing pairs with &gt;= 3 shared commits.
+Strong coupling (&gt;= 0.5) suggests hidden dependencies — consider extracting shared abstractions.
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong> File renames are not tracked across git history. Renamed files appear as separate entries.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-authors--per-author-ownership-summary"><a class="header" href="#km-authors--per-author-ownership-summary"><code>km authors</code> — Per-author ownership summary</a></h1>
+<p>Summarizes code ownership across the project by author. Aggregates <code>git blame</code> data to answer "who knows what?" at the team level — complementing <code>km knowledge</code> (per-file view) with a team-level view.</p>
+<pre><code class="language-bash">km authors [path]
+</code></pre>
+<h2 id="options-17"><a class="header" href="#options-17">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--since DURATION</code></td><td>Only consider activity since this time (e.g. <code>6m</code>, <code>1y</code>, <code>30d</code>)</td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-12"><a class="header" href="#example-output-12">Example output</a></h2>
+<pre><code>──────────────────────────────────────────────────────────────────────
+ Author              Owned      Lines  Languages    Last Active
+──────────────────────────────────────────────────────────────────────
+ E. Diaz                38       8432  Rust, TOML   2026-03-15
+ R. Ramirez              4        312  Rust         2026-02-10
+──────────────────────────────────────────────────────────────────────
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="km-age--file-age-analysis"><a class="header" href="#km-age--file-age-analysis"><code>km age</code> — File age analysis</a></h1>
+<p>Classifies source files as <strong>Active</strong>, <strong>Stale</strong>, or <strong>Frozen</strong> based on how long ago they were last modified in git history. Helps identify neglected or abandoned code.</p>
+<pre><code class="language-bash">km age [path]
+</code></pre>
+<h2 id="status-classification"><a class="header" href="#status-classification">Status classification</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Status</th><th>Condition</th><th>Meaning</th></tr></thead><tbody>
+<tr><td>ACTIVE</td><td>Modified within <code>--active-days</code> days (default: 90)</td><td>Regularly touched</td></tr>
+<tr><td>STALE</td><td>Between <code>--active-days</code> and <code>--frozen-days</code> (default: 365)</td><td>Neglected</td></tr>
+<tr><td>FROZEN</td><td>Not modified for more than <code>--frozen-days</code> days</td><td>Potentially abandoned</td></tr>
+</tbody></table>
+</div>
+<h2 id="options-18"><a class="header" href="#options-18">Options</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Flag</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>--active-days N</code></td><td>Days threshold for Active status (default: 90)</td></tr>
+<tr><td><code>--frozen-days N</code></td><td>Days threshold for Frozen status (default: 365)</td></tr>
+<tr><td><code>--sort-by METRIC</code></td><td>Sort by <code>date</code> (oldest first, default), <code>status</code>, or <code>file</code></td></tr>
+<tr><td><code>--status FILTER</code></td><td>Show only files with this status: <code>active</code>, <code>stale</code>, or <code>frozen</code></td></tr>
+<tr><td><code>--json</code></td><td>Output as JSON</td></tr>
+</tbody></table>
+</div>
+<h2 id="example-output-13"><a class="header" href="#example-output-13">Example output</a></h2>
+<pre><code>──────────────────────────────────────────────────────────────────────────────
+ File                    Language     Last Modified  Days  Status
+──────────────────────────────────────────────────────────────────────────────
+ src/legacy/parser.rs    Rust           2023-01-15   840  FROZEN
+ src/util.rs             Rust           2024-09-20   197  STALE
+ src/main.rs             Rust           2026-03-01    34  ACTIVE
+──────────────────────────────────────────────────────────────────────────────
+
+  ACTIVE     12  (modified &lt; 90 days)
+  STALE       8  (90 days – 365 days)
+  FROZEN      3  (not modified &gt; 365 days)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="supported-languages-1"><a class="header" href="#supported-languages-1">Supported Languages</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Language</th><th>Extensions / Filenames</th></tr></thead><tbody>
+<tr><td>Bourne Again Shell</td><td><code>.bash</code></td></tr>
+<tr><td>Bourne Shell</td><td><code>.sh</code></td></tr>
+<tr><td>C</td><td><code>.c</code>, <code>.h</code></td></tr>
+<tr><td>C#</td><td><code>.cs</code></td></tr>
+<tr><td>C++</td><td><code>.cpp</code>, <code>.cxx</code>, <code>.cc</code>, <code>.hpp</code>, <code>.hxx</code></td></tr>
+<tr><td>Clojure</td><td><code>.clj</code>, <code>.cljs</code>, <code>.cljc</code>, <code>.edn</code></td></tr>
+<tr><td>CSS</td><td><code>.css</code></td></tr>
+<tr><td>Dart</td><td><code>.dart</code></td></tr>
+<tr><td>Dockerfile</td><td><code>Dockerfile</code></td></tr>
+<tr><td>DOS Batch</td><td><code>.bat</code>, <code>.cmd</code></td></tr>
+<tr><td>Elixir</td><td><code>.ex</code></td></tr>
+<tr><td>Elixir Script</td><td><code>.exs</code></td></tr>
+<tr><td>Erlang</td><td><code>.erl</code>, <code>.hrl</code></td></tr>
+<tr><td>F#</td><td><code>.fs</code>, <code>.fsi</code>, <code>.fsx</code></td></tr>
+<tr><td>Go</td><td><code>.go</code></td></tr>
+<tr><td>Gradle</td><td><code>.gradle</code></td></tr>
+<tr><td>Groovy</td><td><code>.groovy</code></td></tr>
+<tr><td>Haskell</td><td><code>.hs</code></td></tr>
+<tr><td>HTML</td><td><code>.html</code>, <code>.htm</code></td></tr>
+<tr><td>Java</td><td><code>.java</code></td></tr>
+<tr><td>JavaScript</td><td><code>.js</code>, <code>.mjs</code>, <code>.cjs</code></td></tr>
+<tr><td>JSON</td><td><code>.json</code></td></tr>
+<tr><td>Julia</td><td><code>.jl</code></td></tr>
+<tr><td>Kotlin</td><td><code>.kt</code>, <code>.kts</code></td></tr>
+<tr><td>Lua</td><td><code>.lua</code></td></tr>
+<tr><td>Makefile</td><td><code>.mk</code>, <code>Makefile</code>, <code>makefile</code>, <code>GNUmakefile</code></td></tr>
+<tr><td>Markdown</td><td><code>.md</code>, <code>.markdown</code></td></tr>
+<tr><td>Nim</td><td><code>.nim</code></td></tr>
+<tr><td>Objective-C</td><td><code>.m</code>, <code>.mm</code></td></tr>
+<tr><td>OCaml</td><td><code>.ml</code>, <code>.mli</code></td></tr>
+<tr><td>Perl</td><td><code>.pl</code>, <code>.pm</code></td></tr>
+<tr><td>PHP</td><td><code>.php</code></td></tr>
+<tr><td>Properties</td><td><code>.properties</code></td></tr>
+<tr><td>Python</td><td><code>.py</code>, <code>.pyi</code></td></tr>
+<tr><td>R</td><td><code>.r</code>, <code>.R</code></td></tr>
+<tr><td>Ruby</td><td><code>.rb</code>, <code>Rakefile</code>, <code>Gemfile</code></td></tr>
+<tr><td>Rust</td><td><code>.rs</code></td></tr>
+<tr><td>Scala</td><td><code>.scala</code>, <code>.sc</code>, <code>.sbt</code></td></tr>
+<tr><td>SQL</td><td><code>.sql</code></td></tr>
+<tr><td>Swift</td><td><code>.swift</code></td></tr>
+<tr><td>Terraform</td><td><code>.tf</code></td></tr>
+<tr><td>Text</td><td><code>.txt</code></td></tr>
+<tr><td>TOML</td><td><code>.toml</code></td></tr>
+<tr><td>TypeScript</td><td><code>.ts</code>, <code>.mts</code>, <code>.cts</code></td></tr>
+<tr><td>XML</td><td><code>.xml</code>, <code>.xsl</code>, <code>.xslt</code>, <code>.svg</code>, <code>.fsproj</code>, <code>.csproj</code>, <code>.vbproj</code>, <code>.vcxproj</code>, <code>.sln</code>, <code>.plist</code>, <code>.xaml</code></td></tr>
+<tr><td>YAML</td><td><code>.yaml</code>, <code>.yml</code></td></tr>
+<tr><td>Zig</td><td><code>.zig</code></td></tr>
+<tr><td>Zsh</td><td><code>.zsh</code></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="architecture"><a class="header" href="#architecture">Architecture</a></h1>
+<p>Kimün is a CLI tool for code metrics built around a character-level finite state machine for line classification. All commands share a common file-walking layer (<code>src/walk.rs</code>, via the <code>ignore</code> crate) that respects <code>.gitignore</code> rules and deduplicates files by content hash.</p>
+<h2 id="module-map"><a class="header" href="#module-map">Module map</a></h2>
+<div class="table-wrapper"><table><thead><tr><th>Module</th><th>Command</th><th>Description</th></tr></thead><tbody>
+<tr><td><code>src/loc/</code></td><td><code>km loc</code></td><td>Line counting FSM</td></tr>
+<tr><td><code>src/dups/</code></td><td><code>km dups</code></td><td>Duplicate detection</td></tr>
+<tr><td><code>src/indent/</code></td><td><code>km indent</code></td><td>Indentation complexity</td></tr>
+<tr><td><code>src/hal/</code></td><td><code>km hal</code></td><td>Halstead metrics</td></tr>
+<tr><td><code>src/cycom/</code></td><td><code>km cycom</code></td><td>Cyclomatic complexity</td></tr>
+<tr><td><code>src/cogcom/</code></td><td><code>km cogcom</code></td><td>Cognitive complexity</td></tr>
+<tr><td><code>src/mi/</code></td><td><code>km mi</code></td><td>Maintainability Index (VS)</td></tr>
+<tr><td><code>src/miv/</code></td><td><code>km miv</code></td><td>Maintainability Index (verifysoft)</td></tr>
+<tr><td><code>src/hotspots/</code></td><td><code>km hotspots</code></td><td>Change frequency × complexity</td></tr>
+<tr><td><code>src/knowledge/</code></td><td><code>km knowledge</code></td><td>Code ownership via git blame</td></tr>
+<tr><td><code>src/tc/</code></td><td><code>km tc</code></td><td>Temporal coupling</td></tr>
+<tr><td><code>src/churn/</code></td><td><code>km churn</code></td><td>Pure change frequency</td></tr>
+<tr><td><code>src/smells/</code></td><td><code>km smells</code></td><td>Code smell detection</td></tr>
+<tr><td><code>src/deps/</code></td><td><code>km deps</code></td><td>Dependency graph + cycle detection</td></tr>
+<tr><td><code>src/authors/</code></td><td><code>km authors</code></td><td>Per-author ownership summary</td></tr>
+<tr><td><code>src/age/</code></td><td><code>km age</code></td><td>File age classification</td></tr>
+<tr><td><code>src/score/</code></td><td><code>km score</code></td><td>Overall health grade</td></tr>
+<tr><td><code>src/report/</code></td><td><code>km report</code></td><td>Multi-metric unified report</td></tr>
+</tbody></table>
+</div>
+<h2 id="srcloc--line-counter-fsm"><a class="header" href="#srcloc--line-counter-fsm"><code>src/loc/</code> — Line counter FSM</a></h2>
+<ul>
+<li>
+<p><strong><code>language.rs</code></strong> — <code>LanguageSpec</code> struct + <code>lang!</code> macro defining 40+ languages. Detection by filename, extension, or shebang. Each spec declares: line comment markers, block comment delimiters, nesting support, string delimiter rules, pragma syntax, and exception characters for comment detection.</p>
+</li>
+<li>
+<p><strong><code>counter.rs</code></strong> — FSM with states <code>Normal</code>, <code>InString(StringKind)</code>, <code>InBlockComment(depth)</code>. Processes files line-by-line via <code>BufReader</code>, classifying each line as blank/comment/code. Mixed lines (code + comment) count as code. Key design decisions:</p>
+<ul>
+<li>Only <code>"</code> triggers string mode (not <code>'</code>) unless <code>single_quote_strings</code> is set — avoids Rust lifetime false positives</li>
+<li><code>InString</code> resets at line end for single/double quotes but persists for triple-quotes (Python)</li>
+<li>Block comments track nesting depth when <code>nested_block_comments</code> is true</li>
+<li>Pragmas (Haskell <code>{-# ... #-}</code>) are checked before block comments and counted as code</li>
+<li>Shebang lines (<code>#!</code>) are always counted as code</li>
+<li><code>line_comment_not_before</code> field prevents <code>--&gt;</code> from matching <code>--</code> in Haskell</li>
+</ul>
+</li>
+<li>
+<p><strong><code>report.rs</code></strong> — Formats results as a table sorted by code lines descending, with totals.</p>
+</li>
+<li>
+<p><strong><code>mod.rs</code></strong> — Orchestrates: walks directory tree, detects language, deduplicates files by content hash (streaming), counts lines, aggregates by language.</p>
+</li>
+</ul>
+<h3 id="adding-a-new-language"><a class="header" href="#adding-a-new-language">Adding a new language</a></h3>
+<p>Use the <code>lang!</code> macro in <code>language.rs</code>. For most languages:</p>
+<pre><pre class="playground"><code class="language-rust"><span class="boring">#![allow(unused)]
+</span><span class="boring">fn main() {
+</span>lang!("LangName", ext: ["ext1", "ext2"],
+      line: "//", block: "/*", "*/", sq: true,
+      shebangs: ["interpreter"]),
+<span class="boring">}</span></code></pre></pre>
+<p>Optional flags: <code>nested: true</code>, <code>sq: true</code> (single-quote strings), <code>tq: true</code> (triple-quote strings), <code>pragma: "{-#", "#-}"</code>. Use <code>lines: ["marker1", "marker2"]</code> for multiple line comment markers. For languages needing <code>line_comment_not_before</code>, write the <code>LanguageSpec</code> struct directly (see Haskell).</p>
+<h2 id="srcmi-and-srcmiv"><a class="header" href="#srcmi-and-srcmiv"><code>src/mi/</code> and <code>src/miv/</code></a></h2>
+<p>Both share the same orchestration pattern: walk files, call <code>hal::analyze_file</code> and <code>cycom::analyze_file</code> (<code>pub(crate)</code>) for Halstead volume and cyclomatic complexity, classify lines for LOC/comment counts, compute MI.</p>
+<p>Note: each file is read three times (once per analyzer) due to per-module architecture.</p>
+<ul>
+<li><strong><code>src/mi/analyzer.rs</code></strong> — <code>MILevel</code> enum (Green/Yellow/Red), VS formula: <code>MAX(0, raw * 100/171)</code>.</li>
+<li><strong><code>src/miv/analyzer.rs</code></strong> — <code>MILevel</code> enum (Good/Moderate/Difficult), verifysoft formula with radians conversion for comment percentage.</li>
+</ul>
+<h2 id="srccogcom--cognitive-complexity"><a class="header" href="#srccogcom--cognitive-complexity"><code>src/cogcom/</code> — Cognitive complexity</a></h2>
+<ul>
+<li><strong><code>analyzer.rs</code></strong> — Core computation: penalizes nesting increments and non-linear control structures. Resets <code>opens_flow</code> after consuming the first <code>{</code> on a control-flow line so closure/struct braces on the same line are not double-counted.</li>
+<li><strong><code>detection.rs</code></strong> — Language-aware function boundary detection.</li>
+<li><strong><code>markers.rs</code></strong> — Per-language complexity markers (keywords that trigger nesting increments).</li>
+</ul>
+<h2 id="srcscore--health-score"><a class="header" href="#srcscore--health-score"><code>src/score/</code> — Health score</a></h2>
+<ul>
+<li><strong><code>analyzer.rs</code></strong> — <code>Grade</code> enum (16 grades: A++ to F--), <code>DimensionScore</code>/<code>FileScore</code>/<code>ProjectScore</code> structs, <code>score_to_grade()</code>, <code>compute_project_score()</code>, <code>Grade::numeric_rank()</code> (used for gate comparisons), <code>Grade::parse()</code> (for <code>--fail-below</code> CLI arg), and 6 normalization functions. Halstead normalization uses effort-per-LOC.</li>
+<li><strong><code>diff.rs</code></strong> — <code>ScoreDiff</code>/<code>ScoreDelta</code> types and <code>compute_diff()</code>. Asserts dimension count and names match before zipping to prevent silent model mismatches.</li>
+<li><strong><code>mod.rs</code></strong> — <code>ScoreGate</code> struct (<code>fail_if_worse</code>, <code>fail_below</code>). <code>run_diff()</code> for <code>--trend</code>/<code>km score diff</code>: computes before/after snapshots, prints report, then evaluates quality gates (gates always evaluated after output so CI logs are complete).</li>
+<li><strong><code>scoring.rs</code></strong> / <strong><code>collector.rs</code></strong> / <strong><code>normalizer.rs</code></strong> — Dimension definitions, per-file metric extraction, and piecewise linear normalization curves.</li>
+</ul>
+<h2 id="git-based-modules"><a class="header" href="#git-based-modules">Git-based modules</a></h2>
+<p><code>hotspots</code>, <code>knowledge</code>, <code>tc</code>, <code>churn</code>, <code>authors</code>, <code>age</code> all open the git repo via <code>git2</code>, count commits or run blame, and use <code>util::parse_since</code> for the <code>--since DURATION</code> flag. <code>tc</code> works entirely from git data — no filesystem walk needed.</p>
+<h2 id="srcsmells"><a class="header" href="#srcsmells"><code>src/smells/</code></a></h2>
+<ul>
+<li><strong><code>rules.rs</code></strong> — Individual smell detectors: long functions, long parameter lists, TODO debt, magic numbers (note: <code>'_'</code> is a valid digit separator, included in <code>is_numeric_char</code>), and commented-out code.</li>
+<li><strong><code>mod.rs</code></strong> — Supports <code>--since-ref &lt;REF&gt;</code> to limit analysis to files changed since a git ref (ideal for CI/PR checks).</li>
+</ul>
+<h2 id="srcreport"><a class="header" href="#srcreport"><code>src/report/</code></a></h2>
+<ul>
+<li><strong><code>data.rs</code></strong> / <strong><code>builder.rs</code></strong> — Data types and per-file metric collection (LOC, dups, indent, Halstead, cyclomatic, MI).</li>
+<li><strong><code>markdown.rs</code></strong> / <strong><code>json.rs</code></strong> — Output formatters.</li>
+<li><strong><code>mod.rs</code></strong> — Walks files once, runs all analyzers, emits unified report.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="contributing"><a class="header" href="#contributing">Contributing</a></h1>
+<h2 id="build--test-commands"><a class="header" href="#build--test-commands">Build &amp; test commands</a></h2>
+<pre><code class="language-bash">cargo build                  # build debug binary
+cargo build --release        # build release binary
+cargo test                   # run all tests
+cargo test &lt;test_name&gt;       # run a single test, e.g. cargo test haskell_arrow_not_comment
+cargo fmt                    # format code — always run before clippy
+cargo clippy                 # lint — must pass with zero warnings before committing
+cargo tarpaulin --out stdout # coverage report (currently ~92%)
+cargo run --bin km -- loc    # run on current directory
+cargo run --bin km -- loc src/  # run on specific path
+</code></pre>
+<p>The binary is named <code>km</code> (configured in <code>[[bin]]</code> in Cargo.toml). After <code>cargo install --path .</code> it installs as <code>km</code>.</p>
+<h2 id="conventions"><a class="header" href="#conventions">Conventions</a></h2>
+<ul>
+<li>The tool's output should match <code>cloc</code> as closely as possible — use <code>cloc</code> as the reference when validating changes.</li>
+<li>Always run <code>cargo fmt</code> before <code>cargo clippy</code>. Then validate with <code>cargo clippy</code> (zero warnings required) and <code>cargo test</code> before considering a change complete.</li>
+<li>When adding or modifying a feature (new command, new flag, changed behavior), update the relevant file in <code>docs/commands/</code> before considering the work done.</li>
+<li>Tests in <code>counter.rs</code> use <code>count_reader(Cursor::new(...))</code> to test the FSM without touching the filesystem.</li>
+<li>Tests in <code>mod.rs</code> use <code>tempfile::tempdir()</code> for integration tests with real files.</li>
+<li>Tests exist in all modules: <code>counter.rs</code>, <code>language.rs</code>, <code>report.rs</code>, <code>mod.rs</code>.</li>
+<li>Edition 2024 Rust (requires recent toolchain).</li>
+</ul>
+<h2 id="documentation"><a class="header" href="#documentation">Documentation</a></h2>
+<p>Command documentation lives in <code>docs/commands/&lt;command&gt;.md</code>. The <code>README.md</code> is a top-level index — it links to these files rather than containing the full content.</p>
+<p>When adding a new command:</p>
+<ol>
+<li>Add <code>docs/commands/&lt;name&gt;.md</code> with usage, options, and example output.</li>
+<li>Add a row to the commands table in <code>README.md</code>.</li>
+<li>Add the module description to <code>docs/architecture.md</code>.</li>
+</ol>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="references"><a class="header" href="#references">References</a></h1>
+<p>The metrics and methodologies implemented in Kimün are based on the following sources.</p>
+<h2 id="books"><a class="header" href="#books">Books</a></h2>
+<ul>
+<li><strong>Adam Thornhill</strong>, <em>Your Code as a Crime Scene</em> (Pragmatic Bookshelf, 2015). Basis for hotspot analysis (ch. 4–5), temporal coupling (ch. 7), knowledge maps / code ownership (ch. 8–9), and indentation-based complexity as a proxy for code quality.</li>
+<li><strong>Adam Thornhill</strong>, <em>Software Design X-Rays</em> (Pragmatic Bookshelf, 2018). Extends the crime scene metaphor with additional behavioral code analysis techniques.</li>
+</ul>
+<h2 id="papers-and-standards"><a class="header" href="#papers-and-standards">Papers and standards</a></h2>
+<ul>
+<li><strong>Maurice H. Halstead</strong>, <em>Elements of Software Science</em> (Elsevier, 1977). Defines the operator/operand metrics: vocabulary, volume, difficulty, effort, estimated bugs, and development time.</li>
+<li><strong>Thomas J. McCabe</strong>, "A Complexity Measure", <em>IEEE Transactions on Software Engineering</em>, SE-2(4), December 1976, pp. 308–320. Introduces cyclomatic complexity as a measure of independent paths through a program's control flow graph.</li>
+<li><strong>Paul Oman &amp; Jack Hagemeister</strong>, "Metrics for Assessing a Software System's Maintainability", <em>Proceedings of the International Conference on Software Maintenance (ICSM)</em>, 1992. Original Maintainability Index formula combining Halstead Volume, cyclomatic complexity, and lines of code.</li>
+<li><strong>Microsoft</strong>, <a href="https://learn.microsoft.com/en-us/visualstudio/code-quality/code-metrics-maintainability-index-range-and-meaning">Code Metrics — Maintainability Index range and meaning</a>. Visual Studio variant: normalized to 0–100 scale, no comment-weight term.</li>
+<li><strong>Verifysoft</strong>, <a href="https://www.verifysoft.com/en_maintainability.html">Maintainability Index</a>. Extended MI formula with a comment-weight component (MIcw) that rewards well-commented code.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
