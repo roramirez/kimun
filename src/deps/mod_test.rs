@@ -38,7 +38,7 @@ fn run_on_empty_dir() {
     let dir = tempfile::tempdir().unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, false, false, "default", 20).unwrap();
+    run(&cfg, false, false, "default", 20, None).unwrap();
 }
 
 #[test]
@@ -46,7 +46,7 @@ fn run_on_empty_dir_json() {
     let dir = tempfile::tempdir().unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, true, false, "default", 20).unwrap();
+    run(&cfg, true, false, "default", 20, None).unwrap();
 }
 
 #[test]
@@ -56,7 +56,7 @@ fn run_on_rust_files_no_deps() {
     fs::write(dir.path().join("lib.rs"), "pub fn helper() {}\n").unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, false, false, "default", 20).unwrap();
+    run(&cfg, false, false, "default", 20, None).unwrap();
 }
 
 #[test]
@@ -68,7 +68,7 @@ fn run_on_rust_with_mod_declaration() {
     fs::write(dir.path().join("foo.rs"), "pub fn foo_fn() {}\n").unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, false, false, "default", 20).unwrap();
+    run(&cfg, false, false, "default", 20, None).unwrap();
 }
 
 #[test]
@@ -77,7 +77,7 @@ fn run_sort_by_fan_in() {
     fs::write(dir.path().join("main.rs"), "fn main() {}\n").unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, false, false, "fan-in", 20).unwrap();
+    run(&cfg, false, false, "fan-in", 20, None).unwrap();
 }
 
 #[test]
@@ -86,7 +86,7 @@ fn run_sort_by_fan_out() {
     fs::write(dir.path().join("main.rs"), "fn main() {}\n").unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, false, false, "fan-out", 20).unwrap();
+    run(&cfg, false, false, "fan-out", 20, None).unwrap();
 }
 
 #[test]
@@ -95,7 +95,7 @@ fn run_cycles_only_filter() {
     fs::write(dir.path().join("main.rs"), "fn main() {}\n").unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, false, true, "default", 20).unwrap();
+    run(&cfg, false, true, "default", 20, None).unwrap();
 }
 
 #[test]
@@ -104,7 +104,7 @@ fn run_cycles_only_json() {
     fs::write(dir.path().join("main.rs"), "fn main() {}\n").unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, true, true, "default", 20).unwrap();
+    run(&cfg, true, true, "default", 20, None).unwrap();
 }
 
 #[test]
@@ -122,7 +122,7 @@ fn run_with_go_module() {
     .unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, false, false, "default", 20).unwrap();
+    run(&cfg, false, false, "default", 20, None).unwrap();
 }
 
 #[test]
@@ -133,7 +133,7 @@ fn run_unreadable_file_gracefully_handled() {
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
     // Should not panic — errors are handled gracefully
-    run(&cfg, false, false, "default", 20).unwrap();
+    run(&cfg, false, false, "default", 20, None).unwrap();
 }
 
 #[test]
@@ -143,5 +143,15 @@ fn run_json_with_mod_deps() {
     fs::write(dir.path().join("foo.rs"), "pub fn f() {}\n").unwrap();
     let filter = ExcludeFilter::default();
     let cfg = WalkConfig::new(dir.path(), false, &filter);
-    run(&cfg, true, false, "default", 20).unwrap();
+    run(&cfg, true, false, "default", 20, None).unwrap();
+}
+
+#[test]
+fn run_dot_format() {
+    let dir = tempfile::tempdir().unwrap();
+    fs::write(dir.path().join("lib.rs"), "mod foo;\n").unwrap();
+    fs::write(dir.path().join("foo.rs"), "pub fn f() {}\n").unwrap();
+    let filter = ExcludeFilter::default();
+    let cfg = WalkConfig::new(dir.path(), false, &filter);
+    run(&cfg, false, false, "default", 20, Some("dot")).unwrap();
 }

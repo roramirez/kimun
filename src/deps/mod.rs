@@ -36,6 +36,7 @@ pub fn run(
     cycles_only: bool,
     sort_by: &str,
     top: usize,
+    format: Option<&str>,
 ) -> Result<(), Box<dyn Error>> {
     let go_module = detect_go_module(cfg.path);
 
@@ -109,11 +110,31 @@ pub fn run(
         result.entries.iter().take(top).collect()
     };
 
-    if json {
-        // For JSON always emit full result (with filtered entries if cycles_only)
-        let filtered = DepResult {
-            entries: entries
-                .iter()
+    match (format, json) {
+        (Some("dot"), _) => {
+            report::print_dot(&result, &edges);
+            Ok(())
+        }
+        (_, true) => {
+            // For JSON always emit full result (with filtered entries if cycles_only)
+            let filtered = DepResult {
+                entries: entries
+                    .iter()
+                    .map(|e| analyzer::DepEntry {
+                        path: e.path.clone(),
+                        language: e.language.clone(),
+                        fan_in: e.fan_in,
+                        fan_out: e.fan_out,
+                        in_cycle: e.in_cycle,
+                    })
+                    .collect(),
+                cycles: result.cycles.clone(),
+            };
+            report::print_json(&filtered)
+        }
+        _ => {
+            let entries_vec: Vec<DepEntry> = entries
+                .into_iter()
                 .map(|e| analyzer::DepEntry {
                     path: e.path.clone(),
                     language: e.language.clone(),
@@ -121,23 +142,10 @@ pub fn run(
                     fan_out: e.fan_out,
                     in_cycle: e.in_cycle,
                 })
-                .collect(),
-            cycles: result.cycles.clone(),
-        };
-        report::print_json(&filtered)
-    } else {
-        let entries_vec: Vec<DepEntry> = entries
-            .into_iter()
-            .map(|e| analyzer::DepEntry {
-                path: e.path.clone(),
-                language: e.language.clone(),
-                fan_in: e.fan_in,
-                fan_out: e.fan_out,
-                in_cycle: e.in_cycle,
-            })
-            .collect();
-        report::print_report(&entries_vec, &result);
-        Ok(())
+                .collect();
+            report::print_report(&entries_vec, &result);
+            Ok(())
+        }
     }
 }
 

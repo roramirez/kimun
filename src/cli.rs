@@ -498,6 +498,10 @@ pub enum Commands {
         /// Show only the top N files (default: 20)
         #[arg(long, default_value = "20")]
         top: usize,
+
+        /// Output format: dot (Graphviz). Incompatible with --json.
+        #[arg(long, value_name = "FORMAT", value_parser = ["dot"], conflicts_with = "json")]
+        format: Option<String>,
     },
 
     /// Summarize code ownership by author: files owned, lines, languages, last active date

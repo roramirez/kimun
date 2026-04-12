@@ -446,13 +446,15 @@ fn main() {
             cycles_only,
             sort_by,
             top,
+            format,
         } => {
             dispatch!(common, |cfg, json| deps::run(
                 &cfg,
                 json,
                 cycles_only,
                 &sort_by,
-                top
+                top,
+                format.as_deref()
             ))
         }
         Commands::Authors { common, since } => {
